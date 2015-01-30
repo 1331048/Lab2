@@ -44,5 +44,17 @@ int DynamicArray::getElement( int _index)
 
 void DynamicArray::setCapacite( int _capacite)
 {
+	//tableauTemporaire = new tabElements(_capacite);
+int*	tableauTemporaire = new int[_capacite];
+for (int i = 0; i < _capacite; i++)
+{
+	tableauTemporaire[i] = 0;
 
+}
+for (int i = 0; i < capacite; i++)
+{
+tableauTemporaire[i] = tabElements[i];
+}
+tabElements = tableauTemporaire;
+delete tableauTemporaire;
 }
