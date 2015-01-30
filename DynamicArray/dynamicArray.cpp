@@ -55,6 +55,8 @@ for (int i = 0; i < capacite; i++)
 {
 tableauTemporaire[i] = tabElements[i];
 }
+delete tabElements;
+capacite = _capacite;
 tabElements = tableauTemporaire;
-delete tableauTemporaire;
+
 }

@@ -65,7 +65,7 @@ namespace DynamicArrayTests
 
 			DynamicArray tableau(CAPACITE_DEPART);
 
-			for (unsigned int i = 0; i < CAPACITE_DEPART; ++i)
+			for ( int i = 0; i < CAPACITE_DEPART; ++i)
 			{
 				tableau.setElement(i, i*i);
 			}
@@ -74,11 +74,11 @@ namespace DynamicArrayTests
 			tableau.setCapacite(NOUVELLE_CAPACITE);
 
 			//Assert
-			for (unsigned int i = 0; i < CAPACITE_DEPART; ++i)
+			for ( int i = 0; i < CAPACITE_DEPART; ++i)
 			{
 				Assert::AreEqual(int(i*i), tableau.getElement(i));
 			}
-			for (unsigned int i = CAPACITE_DEPART; i < NOUVELLE_CAPACITE; ++i)
+			for ( int i = CAPACITE_DEPART; i < NOUVELLE_CAPACITE; ++i)
 			{
 				Assert::AreEqual(0, tableau.getElement(i));
 			}
