@@ -1,5 +1,5 @@
 #include "dynamicArray.h"
-
+#include <stdexcept>
 
 DynamicArray::DynamicArray()
 {
@@ -14,6 +14,10 @@ DynamicArray::DynamicArray()
 
 DynamicArray::DynamicArray(int _capaciteTableau)
 {
+	if (_capaciteTableau < 1)
+	{
+		throw std::invalid_argument("trop petite valeur");
+	}
 	capacite = _capaciteTableau;
 	tabElements = new int[_capaciteTableau];
 	for (int i = 0; i < capacite; i++)
