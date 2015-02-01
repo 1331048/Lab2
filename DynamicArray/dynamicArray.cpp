@@ -58,19 +58,26 @@ int DynamicArray::getElement( int _index)
 
 void DynamicArray::setCapacite( int _capacite)
 {
-	//tableauTemporaire = new tabElements(_capacite);
-int*	tableauTemporaire = new int[_capacite];
-for (int i = 0; i < _capacite; i++)
-{
-	tableauTemporaire[i] = 0;
+	if (_capacite > 0){
 
-}
-for (int i = 0; i < capacite; i++)
-{
-tableauTemporaire[i] = tabElements[i];
-}
-delete tabElements;
-capacite = _capacite;
-tabElements = tableauTemporaire;
 
+		//tableauTemporaire = new tabElements(_capacite);
+		int*	tableauTemporaire = new int[_capacite];
+		for (int i = 0; i < _capacite; i++)
+		{
+			tableauTemporaire[i] = 0;
+
+		}
+		for (int i = 0; i < capacite; i++)
+		{
+			tableauTemporaire[i] = tabElements[i];
+		}
+		delete tabElements;
+		capacite = _capacite;
+		tabElements = tableauTemporaire;
+	}
+	else
+	{
+		throw std::invalid_argument("Trop petite capacité");
+	}
 }
