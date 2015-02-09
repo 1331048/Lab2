@@ -1,6 +1,17 @@
 #include "dynamicArray.h"
 #include <stdexcept>
 
+
+DynamicArray::DynamicArray(const DynamicArray & _source)
+	:capacite(_source.capacite), tabElements(new int[_source.capacite])
+{
+	{
+		for (int i = 0; i < capacite; i++){
+			tabElements[i] = _source.tabElements[i];
+		}
+	}
+
+}
 DynamicArray::DynamicArray()
 {
 	capacite = 100;
@@ -31,17 +42,17 @@ DynamicArray::~DynamicArray()
 
 }
 
-void DynamicArray::setElement( int _index, int _valeur)
+void DynamicArray::setElement(int _index, int _valeur)
 {
 	if (capacite < _index)
 	{
-		setCapacite(_index+1);
+		setCapacite(_index + 1);
 	}
 
 	tabElements[_index] = _valeur;
 }
 
-int DynamicArray::getElement( int _index)
+int DynamicArray::getElement(int _index)
 
 {
 	if (capacite < _index)
@@ -51,12 +62,12 @@ int DynamicArray::getElement( int _index)
 	return tabElements[_index];
 }
 
- int DynamicArray::getCapacite()
+int DynamicArray::getCapacite()
 {
 	return capacite;
 }
 
-void DynamicArray::setCapacite( int _capacite)
+void DynamicArray::setCapacite(int _capacite)
 {
 	if (_capacite > 0){
 
@@ -80,4 +91,45 @@ void DynamicArray::setCapacite( int _capacite)
 	{
 		throw std::invalid_argument("Trop petite capacité");
 	}
+
 }
+DynamicArray& DynamicArray::operator=(const DynamicArray & _operatorSourceEgal) {
+	if (&_operatorSourceEgal != this)
+	{
+		delete[] tabElements;
+		this->capacite = _operatorSourceEgal.capacite;
+		this->tabElements = new int[this->capacite];
+		for (unsigned int i = 0; i < this->capacite; i++)
+		{
+			this->tabElements[i] = _operatorSourceEgal.tabElements[i];
+		}
+	}
+	return *this;
+}
+bool DynamicArray::operator==(const DynamicArray & _operatorSourceEgalEgal) const{
+	//je ne suis pas sur si cela marche mais de ce que j'ai lu oui
+	if (this->capacite != _operatorSourceEgalEgal.capacite){
+		return false;
+	}
+
+	for (int i = 0; i < this->capacite; i++){
+		if (this->tabElements[i] != _operatorSourceEgalEgal.tabElements[i]){
+			return false;
+		}
+	}
+
+	return true;
+}
+void DynamicArray::operator+=(const DynamicArray & _operatorSourceEgalPlus) {
+	int oldCapacite = this->capacite;
+	int newCapacite = oldCapacite + _operatorSourceEgalPlus.capacite;
+	this->setCapacite(newCapacite);
+	int compteur = 0;
+	for (int i = oldCapacite; i < newCapacite; i++){
+		this->setElement(i, _operatorSourceEgalPlus.tabElements[compteur]);
+		compteur++;
+	}
+
+}
+
+
